@@ -1,0 +1,8 @@
+{
+  "name": "Todo Pomodoro",
+  "description": "A productivity application combining a Todo list with a Pomodoro timer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

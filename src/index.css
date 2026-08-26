@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #fdfcf9;
+  --color-ink: #1a1a1a;
+  --color-accent: #2b44ff;
+  --color-ink-faint: rgba(26, 26, 26, 0.08);
+  --color-ink-muted: rgba(26, 26, 26, 0.5);
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-space: 'Space Mono', monospace;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
