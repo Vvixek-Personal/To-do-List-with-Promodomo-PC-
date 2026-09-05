@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg: #fdfcf9;
-  --color-ink: #1a1a1a;
-  --color-accent: #2b44ff;
-  --color-ink-faint: rgba(26, 26, 26, 0.08);
-  --color-ink-muted: rgba(26, 26, 26, 0.5);
-  --font-cormorant: 'Cormorant Garamond', serif;
-  --font-inter: 'Inter', sans-serif;
-  --font-space: 'Space Mono', monospace;
+@layer base {
+  body {
+    background-color: #0a0d20;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 ::selection {
-  background: var(--color-ink);
-  color: var(--color-bg);
+  background: rgba(59, 130, 246, 0.4);
+  color: #ffffff;
 }
+

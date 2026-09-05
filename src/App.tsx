@@ -1,95 +1,140 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { TabId } from './types';
+import { LiquidDock } from './components/LiquidDock';
+import { LiquidBackground } from './components/LiquidBackground';
+import { DashboardView } from './components/views/DashboardView';
+import { WorkView } from './components/views/WorkView';
+import { PlanningView, Task } from './components/views/PlanningView';
+import { CalendarView } from './components/views/CalendarView';
+import { AnalyticsView } from './components/views/AnalyticsView';
+import { SettingsView } from './components/views/SettingsView';
+import { ProfileView } from './components/views/ProfileView';
 
-import { useState } from 'react';
-import { CheckCircle2, Timer, Settings } from 'lucide-react';
-
-type TabId = 'timer' | 'tasks' | 'settings';
+const INITIAL_TASKS: Task[] = [
+  { id: '1', title: 'Complete Pomodoro timer app foundation', estimatedPomodoros: 2, completedPomodoros: 1, completed: false },
+  { id: '2', title: 'Test liquid glass navigation bar interactions', estimatedPomodoros: 1, completedPomodoros: 1, completed: true },
+  { id: '3', title: 'Plan focus intervals for weekly sprint', estimatedPomodoros: 3, completedPomodoros: 0, completed: false },
+];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabId>('timer');
+  const [activeTab, setActiveTab] = useState<TabId>('work');
+  const [activeTaskId, setActiveTaskId] = useState<string | undefined>('1');
 
-  const tabs = [
-    { 
-      id: 'timer', 
-      label: 'Timer', 
-      icon: Timer,
-      desc: 'Pomodoro timer will go here. A modular environment for deep focus sessions and interval training.'
-    },
-    { 
-      id: 'tasks', 
-      label: 'Tasks', 
-      icon: CheckCircle2,
-      desc: 'Todo list and task management will go here. Organize and estimate your workload.'
-    },
-    { 
-      id: 'settings', 
-      label: 'Settings', 
-      icon: Settings,
-      desc: 'App preferences and timer durations will go here. Customize your workspace.'
-    },
-  ] as const;
+  // Load tasks from localStorage or initialize with sample tasks
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    try {
+      const saved = localStorage.getItem('todo_pomodoro_tasks');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return INITIAL_TASKS;
+  });
+
+  // Save tasks to localStorage on update
+  useEffect(() => {
+    try {
+      localStorage.setItem('todo_pomodoro_tasks', JSON.stringify(tasks));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [tasks]);
+
+  const handleAddTask = (title: string, estimatedPomodoros: number) => {
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title,
+      estimatedPomodoros,
+      completedPomodoros: 0,
+      completed: false,
+    };
+    setTasks((prev) => [newTask, ...prev]);
+    if (!activeTaskId) {
+      setActiveTaskId(newTask.id);
+    }
+  };
+
+  const handleToggleTask = (id: string) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
+      )
+    );
+  };
+
+  const handleDeleteTask = (id: string) => {
+    setTasks((prev) => prev.filter((t) => t.id !== id));
+    if (activeTaskId === id) {
+      setActiveTaskId(undefined);
+    }
+  };
+
+  const handleSelectTaskToFocus = (id: string) => {
+    setActiveTaskId(id);
+    setActiveTab('work');
+  };
+
+  const activeTask = tasks.find((t) => t.id === activeTaskId);
 
   return (
-    <div className="h-screen grid grid-rows-[auto_1fr_auto] overflow-hidden bg-bg text-ink font-inter antialiased">
-      <header className="flex justify-between items-end p-[2rem_4vw] border-b-[1.5px] border-ink">
-        <div className="font-space text-[0.65rem] uppercase tracking-[0.15em] text-ink-muted hidden sm:block">
-          [ ST-24 // AI STUDIO ]
-        </div>
-        <nav className="flex gap-6 mx-auto sm:mx-0">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`
-                  relative flex items-center gap-2 py-[0.5rem] bg-transparent border-none cursor-pointer
-                  font-space text-[0.75rem] uppercase tracking-[0.1em] transition-colors duration-300
-                  ${isActive ? 'text-ink' : 'text-ink-muted hover:text-ink/80'}
-                `}
-              >
-                <Icon className="w-[14px] h-[14px] stroke-[1.5px]" />
-                {tab.label}
-                {isActive && (
-                  <div className="absolute -bottom-[2rem] left-0 w-full h-[3px] bg-ink" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
-      </header>
+    <div className="relative min-h-screen flex flex-col font-sans text-white select-none overflow-x-hidden">
+      {/* Ambient Liquid Glass dynamic backdrop */}
+      <LiquidBackground />
 
-      <main className="flex flex-col justify-center items-center p-[4vw] text-center">
-        {tabs.map((tab) => {
-          if (activeTab !== tab.id) return null;
-          const Icon = tab.icon;
-          
-          return (
-            <div key={tab.id} className="animate-in fade-in zoom-in-95 duration-700">
-              <div className="mb-12 opacity-80 flex justify-center">
-                <Icon className="w-16 h-16 stroke-[1px]" />
-              </div>
-              <h1 className="font-cormorant text-[clamp(4rem,10vw,12rem)] leading-[0.85] tracking-[-0.04em] mb-8">
-                {tab.label} View
-              </h1>
-              <p className="text-[1.1rem] leading-[1.6] max-w-[45ch] text-ink-muted mx-auto">
-                {tab.desc}
-              </p>
-            </div>
-          );
-        })}
+      {/* Main View Area (Header and bottom footer bars completely removed as requested) */}
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-8 pb-32 flex flex-col items-center justify-center">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 14, scale: 0.985 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -14, scale: 0.985 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex flex-col items-center justify-center"
+          >
+            {activeTab === 'dashboard' && (
+              <DashboardView
+                tasks={tasks}
+                activeTaskTitle={activeTask?.title}
+                onNavigateToWork={() => setActiveTab('work')}
+                onNavigateToPlanning={() => setActiveTab('planning')}
+              />
+            )}
+
+            {activeTab === 'work' && (
+              <WorkView
+                activeTaskTitle={activeTask?.title}
+                onNavigateToPlanning={() => setActiveTab('planning')}
+              />
+            )}
+
+            {activeTab === 'planning' && (
+              <PlanningView
+                tasks={tasks}
+                activeTaskId={activeTaskId}
+                onAddTask={handleAddTask}
+                onToggleTask={handleToggleTask}
+                onDeleteTask={handleDeleteTask}
+                onSelectTaskToFocus={handleSelectTaskToFocus}
+              />
+            )}
+
+            {activeTab === 'calendar' && <CalendarView />}
+
+            {activeTab === 'analytics' && <AnalyticsView />}
+
+            {activeTab === 'settings' && <SettingsView />}
+
+            {activeTab === 'profile' && <ProfileView />}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
-      <footer className="flex justify-between p-[1.5rem_4vw] border-t border-ink-faint font-space text-[0.6rem] uppercase tracking-[0.1em] text-ink-muted">
-        <div>V 1.0.4 - SYSTEM ACTIVE</div>
-        <div className="hidden sm:block">ST-TIME-MODULE_001</div>
-        <div>LOC / INT-VIEWPORT</div>
-      </footer>
+      {/* Floating Liquid Glass Dockbar at Bottom */}
+      <div className="fixed bottom-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+        <LiquidDock activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
     </div>
   );
 }
