@@ -38,11 +38,11 @@ export function PlanningView({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto flex flex-col items-center">
-      {/* Liquid Glass Header Card & Task Input */}
-      <div className="w-full rounded-3xl border border-white/20 bg-gradient-to-b from-white/[0.12] via-white/[0.05] to-white/[0.02] backdrop-blur-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.3)] mb-6">
-        <h2 className="text-xl font-medium text-white mb-1">Planning & Tasks</h2>
-        <p className="text-xs text-white/50 mb-5">Organize your action items and assign focus intervals.</p>
+    <div className="w-full max-w-3xl mx-auto flex flex-col items-center font-sans">
+      {/* Frosted Glass Header Card & Task Input */}
+      <div className="w-full rounded-3xl border border-white/80 bg-white/70 backdrop-blur-2xl p-7 shadow-[0_14px_40px_rgba(30,40,90,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)] mb-6">
+        <h2 className="text-xl font-bold text-[#0f172a] mb-1">Planning & Tasks</h2>
+        <p className="text-xs text-[#64748b] mb-5">Organize your action items and assign focus intervals.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
           <input
@@ -51,20 +51,20 @@ export function PlanningView({
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
             placeholder="What will you work on next?"
-            className="flex-1 bg-white/[0.06] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-blue-400 focus:bg-white/[0.1] transition-all"
+            className="flex-1 bg-white/80 border border-white/90 rounded-2xl px-4 py-3 text-sm text-[#0f172a] placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-[#3b5bfd]/30 focus:border-[#3b5bfd] transition-all shadow-sm"
           />
 
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 bg-white/[0.06] border border-white/15 rounded-2xl px-3 py-3 text-xs text-white/70">
-              <Flame className="w-3.5 h-3.5 text-blue-400" />
-              <span>Est:</span>
+            <div className="flex items-center gap-1.5 bg-white/80 border border-white/90 rounded-2xl px-3 py-3 text-xs text-[#475569] shadow-sm">
+              <Flame className="w-3.5 h-3.5 text-[#3b5bfd]" />
+              <span className="font-medium">Est:</span>
               <select
                 value={newEst}
                 onChange={(e) => setNewEst(Number(e.target.value))}
-                className="bg-transparent text-white font-medium focus:outline-none cursor-pointer"
+                className="bg-transparent text-[#0f172a] font-semibold focus:outline-none cursor-pointer"
               >
                 {[1, 2, 3, 4, 5, 6, 8].map((n) => (
-                  <option key={n} value={n} className="bg-neutral-900 text-white">
+                  <option key={n} value={n} className="bg-white text-[#0f172a]">
                     {n} pom
                   </option>
                 ))}
@@ -74,9 +74,9 @@ export function PlanningView({
             <button
               type="submit"
               id="add-task-btn"
-              className="flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-medium px-5 py-3 rounded-2xl border border-white/20 shadow-[0_4px_16px_rgba(43,68,255,0.4)] transition-all cursor-pointer whitespace-nowrap"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] hover:from-[#324fdf] hover:to-[#4e40e6] text-white text-sm font-semibold px-5 py-3 rounded-2xl shadow-[0_8px_20px_rgba(59,91,253,0.3)] transition-all cursor-pointer whitespace-nowrap"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 stroke-[2.5]" />
               Add Task
             </button>
           </div>
@@ -84,9 +84,9 @@ export function PlanningView({
       </div>
 
       {/* Task List in Glass Cards */}
-      <div className="w-full space-y-2.5 max-h-[420px] overflow-y-auto pr-1">
+      <div className="w-full space-y-3 max-h-[440px] overflow-y-auto pr-1">
         {tasks.length === 0 ? (
-          <div className="p-10 rounded-2xl border border-dashed border-white/15 text-center text-white/40 text-sm">
+          <div className="p-10 rounded-3xl border border-dashed border-white/80 bg-white/40 text-center text-[#64748b] text-sm">
             No tasks planned yet. Add your first task above!
           </div>
         ) : (
@@ -98,8 +98,8 @@ export function PlanningView({
                 key={task.id}
                 className={`group flex items-center justify-between p-4 rounded-2xl border transition-all ${
                   isFocusing
-                    ? 'border-blue-400/50 bg-blue-500/[0.12] shadow-[0_4px_20px_rgba(43,68,255,0.2)]'
-                    : 'border-white/10 bg-white/[0.04] hover:bg-white/[0.08]'
+                    ? 'border-[#3b5bfd]/60 bg-blue-50/70 shadow-[0_8px_25px_rgba(59,91,253,0.12)]'
+                    : 'border-white/90 bg-white/70 hover:bg-white/90 shadow-sm'
                 } backdrop-blur-xl`}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
@@ -108,7 +108,7 @@ export function PlanningView({
                     className={`w-5 h-5 rounded-lg border flex items-center justify-center transition-colors cursor-pointer ${
                       task.completed
                         ? 'bg-emerald-500 border-emerald-400 text-white'
-                        : 'border-white/30 hover:border-white/60 bg-white/[0.05]'
+                        : 'border-[#cbd5e1] hover:border-[#3b5bfd] bg-white'
                     }`}
                   >
                     {task.completed && <Check className="w-3.5 h-3.5 stroke-[2.5]" />}
@@ -116,19 +116,19 @@ export function PlanningView({
 
                   <div className="min-w-0">
                     <p
-                      className={`text-sm font-medium truncate ${
-                        task.completed ? 'line-through text-white/40' : 'text-white'
+                      className={`text-sm font-semibold truncate ${
+                        task.completed ? 'line-through text-[#94a3b8]' : 'text-[#1e293b]'
                       }`}
                     >
                       {task.title}
                     </p>
-                    <div className="flex items-center gap-2 mt-0.5 text-xs text-white/50">
-                      <span className="flex items-center gap-1">
-                        <Flame className="w-3 h-3 text-blue-400" />
+                    <div className="flex items-center gap-2 mt-0.5 text-xs text-[#64748b]">
+                      <span className="flex items-center gap-1 font-medium">
+                        <Flame className="w-3 h-3 text-[#3b5bfd]" />
                         {task.completedPomodoros} / {task.estimatedPomodoros} poms
                       </span>
                       {isFocusing && (
-                        <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30">
+                        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-[#dbeafe] text-[#1d4ed8]">
                           Active Focus
                         </span>
                       )}
@@ -139,10 +139,10 @@ export function PlanningView({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => onSelectTaskToFocus(task.id)}
-                    className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                    className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       isFocusing
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-white/[0.08] hover:bg-white/[0.15] text-white/70 hover:text-white'
+                        ? 'bg-[#3b5bfd] text-white shadow-sm'
+                        : 'bg-white/80 hover:bg-white text-[#475569] hover:text-[#0f172a] border border-[#e2e8f0]'
                     }`}
                     title="Focus on this task with Pomodoro timer"
                   >
@@ -152,7 +152,7 @@ export function PlanningView({
 
                   <button
                     onClick={() => onDeleteTask(task.id)}
-                    className="p-1.5 rounded-lg text-white/30 hover:text-rose-400 hover:bg-white/[0.06] transition-colors"
+                    className="p-1.5 rounded-lg text-[#94a3b8] hover:text-rose-500 hover:bg-white transition-colors cursor-pointer"
                     title="Delete task"
                   >
                     <Trash2 className="w-4 h-4" />

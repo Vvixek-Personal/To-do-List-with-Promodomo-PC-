@@ -1,0 +1,63 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    function isValidUser(data) {
+      return data.id is string
+        && data.email is string
+        && data.createdAt is string
+        && data.id == request.auth.uid
+        && data.email.size() <= 256;
+    }
+
+    function isValidTask(data, userId) {
+      return data.id is string
+        && data.userId is string
+        && data.userId == userId
+        && data.title is string
+        && data.title.size() > 0
+        && data.title.size() <= 500
+        && data.estimatedPomodoros is number
+        && data.estimatedPomodoros >= 1
+        && data.estimatedPomodoros <= 20
+        && data.completedPomodoros is number
+        && data.completedPomodoros >= 0
+        && data.completed is bool;
+    }
+
+    // User profile matching /users/{userId}
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && isValidId(userId) && isValidUser(request.resource.data);
+      allow update: if isOwner(userId) && isValidId(userId) && isValidUser(request.resource.data);
+      allow delete: if isOwner(userId) && isValidId(userId);
+
+      // Tasks subcollection matching /users/{userId}/tasks/{taskId}
+      match /tasks/{taskId} {
+        allow get: if isOwner(userId) && isValidId(taskId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidId(taskId) && isValidTask(request.resource.data, userId);
+        allow update: if isOwner(userId) && isValidId(taskId) && isValidTask(request.resource.data, userId);
+        allow delete: if isOwner(userId) && isValidId(taskId);
+      }
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

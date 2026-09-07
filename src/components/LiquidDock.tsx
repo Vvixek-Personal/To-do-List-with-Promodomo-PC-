@@ -64,18 +64,18 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
   return (
     <div className="relative z-50 flex items-center justify-center pointer-events-auto select-none">
       {/* Liquid Glass Capsule Bar */}
-      <div className="relative flex items-center p-1.5 sm:p-2 rounded-full border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.65),inset_0_1.5px_2px_rgba(255,255,255,0.45),inset_0_-1px_2px_rgba(255,255,255,0.1)] bg-gradient-to-b from-white/[0.16] via-white/[0.07] to-white/[0.03] backdrop-blur-2xl overflow-hidden transition-all duration-300">
+      <div className="relative flex items-center p-1.5 sm:p-2 rounded-full border border-white/90 shadow-[0_20px_50px_rgba(15,23,42,0.12),inset_0_1.5px_2px_rgba(255,255,255,0.95)] bg-white/70 hover:bg-white/80 backdrop-blur-2xl overflow-hidden transition-all duration-300">
         
-        {/* Specular Liquid Glare / Glass Refraction Curve (matching reference image) */}
+        {/* Specular Liquid Glare / Glass Refraction Curve */}
         <div 
-          className="absolute inset-0 pointer-events-none opacity-60 mix-blend-screen"
+          className="absolute inset-0 pointer-events-none opacity-70 mix-blend-overlay"
           style={{
-            background: 'radial-gradient(ellipse 65% 50% at 75% 20%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 55%, transparent 80%)'
+            background: 'radial-gradient(ellipse 65% 50% at 75% 20%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.1) 55%, transparent 80%)'
           }}
         />
 
         {/* Ambient Top Rim Highlight */}
-        <div className="absolute top-0 inset-x-6 h-[1px] bg-gradient-to-r from-transparent via-white/70 to-transparent pointer-events-none" />
+        <div className="absolute top-0 inset-x-6 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent pointer-events-none" />
 
         {/* Navigation Items */}
         <div className="relative flex items-center gap-1 sm:gap-1.5 z-10">
@@ -91,7 +91,7 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
                 className={`
                   relative group flex items-center justify-center rounded-full px-3 py-2.5 sm:px-3.5 sm:py-2.5 
                   transition-colors duration-200 outline-none cursor-pointer
-                  ${isActive ? 'text-white' : 'text-white/60 hover:text-white/95'}
+                  ${isActive ? 'text-[#3b5bfd]' : 'text-[#64748b] hover:text-[#0f172a]'}
                 `}
                 title={item.label}
               >
@@ -99,7 +99,7 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
                 {isActive && (
                   <motion.div
                     layoutId="liquidActivePill"
-                    className="absolute inset-0 rounded-full bg-white/[0.15] border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_16px_rgba(0,0,0,0.25)] backdrop-blur-md"
+                    className="absolute inset-0 rounded-full bg-white/90 border border-white shadow-[0_4px_16px_rgba(59,91,253,0.18),inset_0_1px_1px_white] backdrop-blur-md"
                     transition={{
                       type: 'spring',
                       stiffness: 450,
@@ -122,7 +122,7 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
                           opacity: { duration: 0.18, ease: 'easeOut' },
                           filter: { duration: 0.18 }
                         }}
-                        className="overflow-hidden whitespace-nowrap text-xs sm:text-sm font-medium tracking-wide pr-2 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                        className="overflow-hidden whitespace-nowrap text-xs sm:text-sm font-semibold tracking-wide pr-2 text-[#3b5bfd]"
                       >
                         {item.label}
                       </motion.span>
@@ -138,8 +138,8 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
                     className="flex items-center justify-center"
                   >
                     <Icon 
-                      className={`w-[19px] h-[19px] sm:w-5 sm:h-5 transition-transform duration-200 stroke-[1.65] ${
-                        isActive ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]' : ''
+                      className={`w-[19px] h-[19px] sm:w-5 sm:h-5 transition-transform duration-200 stroke-[1.75] ${
+                        isActive ? 'text-[#3b5bfd]' : 'text-[#64748b] group-hover:text-[#0f172a]'
                       }`} 
                     />
                   </motion.div>
@@ -147,7 +147,7 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
 
                 {/* Subtle hover indicator when inactive */}
                 {!isActive && (
-                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-white/[0.06] transition-opacity duration-200" />
+                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-white/40 transition-opacity duration-200" />
                 )}
               </button>
             );

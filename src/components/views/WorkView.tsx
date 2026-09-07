@@ -4,6 +4,7 @@ import { Play, Pause, RotateCcw, Flame, Coffee, Sparkles } from 'lucide-react';
 interface WorkViewProps {
   activeTaskTitle?: string;
   onNavigateToPlanning: () => void;
+  onPomodoroComplete?: () => void;
 }
 
 type Mode = 'pomodoro' | 'shortBreak' | 'longBreak';
@@ -14,7 +15,7 @@ const MODE_TIMES: Record<Mode, number> = {
   longBreak: 15 * 60,
 };
 
-export function WorkView({ activeTaskTitle, onNavigateToPlanning }: WorkViewProps) {
+export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComplete }: WorkViewProps) {
   const [mode, setMode] = useState<Mode>('pomodoro');
   const [timeLeft, setTimeLeft] = useState(MODE_TIMES.pomodoro);
   const [isRunning, setIsRunning] = useState(false);
@@ -30,10 +31,13 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning }: WorkViewProp
       setIsRunning(false);
       if (mode === 'pomodoro') {
         setCompletedSessions((c) => c + 1);
+        if (onPomodoroComplete) {
+          onPomodoroComplete();
+        }
       }
     }
     return () => clearInterval(interval);
-  }, [isRunning, timeLeft, mode]);
+  }, [isRunning, timeLeft, mode, onPomodoroComplete]);
 
   const switchMode = (newMode: Mode) => {
     setMode(newMode);
@@ -54,62 +58,63 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning }: WorkViewProp
   const progressPercent = ((totalSeconds - timeLeft) / totalSeconds) * 100;
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center">
-      {/* Mode Selector Pill in Liquid Glass */}
-      <div className="flex items-center p-1.5 rounded-full bg-white/[0.07] border border-white/15 backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] mb-10">
+    <div className="w-full max-w-xl mx-auto flex flex-col items-center font-sans">
+      {/* Mode Selector Pill in Frosted Glass */}
+      <div className="flex items-center p-1.5 rounded-full bg-white/70 border border-white/80 backdrop-blur-2xl shadow-[0_8px_25px_rgba(30,40,90,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] mb-8">
         <button
           onClick={() => switchMode('pomodoro')}
-          className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
             mode === 'pomodoro'
-              ? 'bg-white/20 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] border border-white/25'
-              : 'text-white/60 hover:text-white/90 border border-transparent'
+              ? 'bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] text-white shadow-[0_4px_16px_rgba(59,91,253,0.35)]'
+              : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Flame className="w-4 h-4 text-blue-400 stroke-[1.75]" />
+          <Flame className="w-4 h-4 stroke-[2]" />
           Focus (25m)
         </button>
         <button
           onClick={() => switchMode('shortBreak')}
-          className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
             mode === 'shortBreak'
-              ? 'bg-white/20 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] border border-white/25'
-              : 'text-white/60 hover:text-white/90 border border-transparent'
+              ? 'bg-emerald-600 text-white shadow-[0_4px_16px_rgba(16,185,129,0.35)]'
+              : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Coffee className="w-4 h-4 text-emerald-400 stroke-[1.75]" />
+          <Coffee className="w-4 h-4 stroke-[2]" />
           Short Break (5m)
         </button>
         <button
           onClick={() => switchMode('longBreak')}
-          className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
             mode === 'longBreak'
-              ? 'bg-white/20 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] border border-white/25'
-              : 'text-white/60 hover:text-white/90 border border-transparent'
+              ? 'bg-indigo-600 text-white shadow-[0_4px_16px_rgba(79,70,229,0.35)]'
+              : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Sparkles className="w-4 h-4 text-indigo-300 stroke-[1.75]" />
+          <Sparkles className="w-4 h-4 stroke-[2]" />
           Long Break (15m)
         </button>
       </div>
 
-      {/* Main Liquid Glass Timer Card */}
-      <div className="relative w-full aspect-square max-w-sm rounded-[40px] p-8 flex flex-col items-center justify-between border border-white/20 bg-gradient-to-b from-white/[0.14] via-white/[0.05] to-white/[0.02] backdrop-blur-3xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8),inset_0_2px_3px_rgba(255,255,255,0.4)]">
+      {/* Main Frosted Glass Timer Card */}
+      <div className="relative w-full aspect-square max-w-sm rounded-[36px] p-8 flex flex-col items-center justify-between border border-white/80 bg-white/70 backdrop-blur-2xl shadow-[0_16px_45px_rgba(30,40,90,0.08),inset_0_1.5px_2px_rgba(255,255,255,0.95)]">
+        
         {/* Specular gloss highlight */}
         <div 
-          className="absolute inset-0 rounded-[40px] pointer-events-none opacity-40 mix-blend-screen"
+          className="absolute inset-0 rounded-[36px] pointer-events-none opacity-60 mix-blend-overlay"
           style={{
-            background: 'radial-gradient(ellipse 70% 40% at 75% 10%, rgba(255, 255, 255, 0.4) 0%, transparent 60%)'
+            background: 'radial-gradient(ellipse 70% 40% at 75% 10%, rgba(255, 255, 255, 0.9) 0%, transparent 60%)'
           }}
         />
 
         {/* Current Active Task Tag */}
-        <div className="relative z-10 w-full flex justify-between items-center text-xs text-white/70">
-          <span className="font-mono tracking-wider uppercase text-white/50 text-[11px]">
+        <div className="relative z-10 w-full flex justify-between items-center text-xs">
+          <span className="font-bold tracking-wider uppercase text-[#3b5bfd] text-[11px]">
             SESSION #{completedSessions + 1}
           </span>
           <button
             onClick={onNavigateToPlanning}
-            className="text-[11px] font-medium text-blue-300 hover:text-white transition-colors underline-offset-4 hover:underline"
+            className="text-[11px] font-semibold text-[#3b5bfd] hover:text-[#2546db] transition-colors underline-offset-4 hover:underline cursor-pointer truncate max-w-[200px]"
           >
             {activeTaskTitle ? `Focus: ${activeTaskTitle}` : '+ Select Task'}
           </button>
@@ -117,17 +122,17 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning }: WorkViewProp
 
         {/* Giant Digital Readout */}
         <div className="relative z-10 flex flex-col items-center justify-center my-auto">
-          <div className="text-7xl sm:text-8xl font-light tracking-tight text-white drop-shadow-[0_4px_24px_rgba(255,255,255,0.2)] font-sans select-none">
+          <div className="text-7xl sm:text-8xl font-bold tracking-tight text-[#0f172a] drop-shadow-sm font-sans select-none">
             {formattedTime}
           </div>
-          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-white/50 font-medium">
+          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[#64748b] font-semibold">
             {isRunning ? 'Session in progress' : 'Ready to begin'}
           </p>
 
           {/* Progress bar line */}
-          <div className="w-48 h-1 bg-white/10 rounded-full mt-6 overflow-hidden">
+          <div className="w-52 h-1.5 bg-[#e2e8f0] rounded-full mt-6 overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-blue-500 to-indigo-400 transition-all duration-300"
+              className="h-full bg-gradient-to-r from-[#3b5bfd] to-[#6366f1] transition-all duration-300 rounded-full"
               style={{ width: `${progressPercent}%` }}
             />
           </div>
@@ -138,16 +143,16 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning }: WorkViewProp
           <button
             id="work-timer-reset"
             onClick={resetTimer}
-            className="p-3.5 rounded-full border border-white/15 bg-white/[0.06] text-white/70 hover:text-white hover:bg-white/[0.12] transition-all duration-200 cursor-pointer"
+            className="p-3.5 rounded-full border border-white/90 bg-white/80 hover:bg-white text-[#64748b] hover:text-[#0f172a] shadow-sm transition-all cursor-pointer"
             title="Reset Timer"
           >
-            <RotateCcw className="w-5 h-5 stroke-[1.75]" />
+            <RotateCcw className="w-5 h-5 stroke-[2]" />
           </button>
 
           <button
             id="work-timer-toggle"
             onClick={toggleTimer}
-            className="px-8 py-3.5 rounded-full border border-white/30 bg-gradient-to-r from-blue-600/80 to-indigo-600/80 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-sm shadow-[0_8px_25px_rgba(43,68,255,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] transition-all duration-200 cursor-pointer flex items-center gap-2"
+            className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] hover:from-[#324fdf] hover:to-[#4e40e6] text-white font-semibold text-sm shadow-[0_10px_25px_rgba(59,91,253,0.35)] transition-all cursor-pointer flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
           >
             {isRunning ? (
               <>
