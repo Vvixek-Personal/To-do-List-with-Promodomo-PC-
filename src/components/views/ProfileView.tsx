@@ -92,7 +92,7 @@ export function ProfileView({
 
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 justify-center sm:justify-start">
-            <h2 className="font-header text-2xl font-black text-[#0f172a] truncate tracking-tight">
+            <h2 className="font-header text-2xl font-bold text-[#0f172a] truncate tracking-tight">
               {user?.displayName || (user ? 'Focus Explorer' : 'Guest Explorer')}
             </h2>
             <span className="font-header inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase bg-blue-100 text-[#1d4ed8] w-fit mx-auto sm:mx-0 flex-shrink-0">
@@ -107,11 +107,11 @@ export function ProfileView({
 
           <div className="font-detail flex items-center justify-center sm:justify-start gap-4 mt-4 text-xs font-medium text-[#475569]">
             <div>
-              <span className="font-header font-black text-[#0f172a] text-sm">{completedPomodorosCount}</span> Poms Completed
+              <span className="font-header font-bold text-[#0f172a] text-sm tabular-nums">{completedPomodorosCount}</span> Poms Completed
             </div>
             <div>&bull;</div>
             <div>
-              <span className="font-header font-black text-[#0f172a] text-sm">{streakDays}</span> {streakDays === 1 ? 'Day' : 'Days'} Streak
+              <span className="font-header font-bold text-[#0f172a] text-sm tabular-nums">{streakDays}</span> {streakDays === 1 ? 'Day' : 'Days'} Streak
             </div>
           </div>
         </div>
@@ -143,10 +143,10 @@ export function ProfileView({
         <div className="rounded-3xl border border-white/90 bg-gradient-to-br from-white/95 via-blue-50/40 to-indigo-50/60 backdrop-blur-2xl p-7 sm:p-8 shadow-[0_16px_45px_rgba(30,40,90,0.08),inset_0_1px_2px_rgba(255,255,255,0.95)]">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-xl">
-              <span className="font-header inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider uppercase bg-blue-100 text-[#3b5bfd] border border-blue-200/60">
+              <span className="font-header inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-blue-100 text-[#3b5bfd] border border-blue-200/60">
                 <Sparkles className="w-3.5 h-3.5" /> Google Integration
               </span>
-              <h3 className="font-header text-xl sm:text-2xl font-black text-[#0f172a] tracking-tight mt-2.5">
+              <h3 className="font-header text-xl sm:text-2xl font-bold text-[#0f172a] tracking-tight mt-2.5">
                 Unlock More with Google Sign-in
               </h3>
               <p className="font-detail text-xs sm:text-sm text-[#475569] mt-1.5 leading-relaxed">

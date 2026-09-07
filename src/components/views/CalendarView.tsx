@@ -40,14 +40,14 @@ export function CalendarView({ tasks, onNavigateToPlanning }: CalendarViewProps)
       <div className="rounded-3xl border border-white/80 bg-white/70 backdrop-blur-2xl p-7 shadow-[0_14px_40px_rgba(30,40,90,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)]">
         <div className="flex items-center justify-between">
           <div>
-            <span className="font-header text-xs font-extrabold tracking-wider uppercase text-[#3b5bfd]">FOCUS SCHEDULE</span>
-            <h2 className="font-header text-2xl font-black text-[#0f172a] tracking-tight mt-1">Today's Focus Blocks</h2>
+            <span className="font-header text-xs font-bold tracking-wider uppercase text-[#3b5bfd]">FOCUS SCHEDULE</span>
+            <h2 className="font-header text-2xl font-bold text-[#0f172a] tracking-tight mt-1">Today's Focus Blocks</h2>
           </div>
           <div className="flex items-center gap-1.5 bg-white/80 border border-white/90 p-1 rounded-2xl shadow-sm">
             <button className="p-1.5 rounded-xl hover:bg-white text-[#64748b] hover:text-[#0f172a] transition-colors cursor-pointer">
               <ChevronLeft className="w-4 h-4" />
             </button>
-            <span className="font-header text-xs font-bold text-[#0f172a] px-2 font-mono">TODAY</span>
+            <span className="font-header text-xs font-bold text-[#0f172a] px-2 tracking-wider">TODAY</span>
             <button className="p-1.5 rounded-xl hover:bg-white text-[#64748b] hover:text-[#0f172a] transition-colors cursor-pointer">
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -73,7 +73,7 @@ export function CalendarView({ tasks, onNavigateToPlanning }: CalendarViewProps)
           <div className="divide-y divide-[#e2e8f0]">
             {scheduledBlocks.map((slot) => (
               <div key={slot.id} className="py-4 first:pt-0 last:pb-0 flex items-start gap-4">
-                <div className="w-24 pt-2 text-xs font-mono font-semibold text-[#64748b] flex-shrink-0">{slot.time}</div>
+                <div className="w-24 pt-2 text-xs font-detail tabular-nums font-semibold text-[#64748b] flex-shrink-0">{slot.time}</div>
                 <div className={`flex-1 p-4 rounded-2xl border ${slot.border} shadow-sm backdrop-blur-md`}>
                   <div className={`font-content text-sm font-bold text-[#0f172a] ${slot.completed ? 'line-through text-[#94a3b8]' : ''}`}>
                     {slot.title}

@@ -251,10 +251,10 @@ export default function App() {
               </svg>
             </div>
             <div className="flex flex-col leading-none">
-              <span className="font-brand font-black tracking-tighter text-[#0f172a] text-lg sm:text-xl uppercase">
+              <span className="font-brand font-bold tracking-tight text-[#0f172a] text-lg sm:text-xl uppercase">
                 POMOFLOW
               </span>
-              <span className="font-detail text-[10px] text-[#64748b] font-semibold tracking-wider uppercase">
+              <span className="font-detail text-[10px] text-[#64748b] font-medium tracking-wider uppercase">
                 Focus & Tasks
               </span>
             </div>

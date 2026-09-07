@@ -12,8 +12,8 @@ export function SettingsView() {
     <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 font-detail">
       {/* Header Card */}
       <div className="rounded-3xl border border-white/80 bg-white/70 backdrop-blur-2xl p-7 shadow-[0_14px_40px_rgba(30,40,90,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)]">
-        <span className="font-header text-xs font-extrabold tracking-wider uppercase text-[#3b5bfd]">PREFERENCES</span>
-        <h2 className="font-header text-2xl font-black text-[#0f172a] tracking-tight mt-1">Timer & App Settings</h2>
+        <span className="font-header text-xs font-bold tracking-wider uppercase text-[#3b5bfd]">PREFERENCES</span>
+        <h2 className="font-header text-2xl font-bold text-[#0f172a] tracking-tight mt-1">Timer & App Settings</h2>
       </div>
 
       {/* Timer Interval Settings */}
@@ -32,7 +32,7 @@ export function SettingsView() {
               max={90}
               value={pomDuration}
               onChange={(e) => setPomDuration(Number(e.target.value))}
-              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-black font-mono focus:outline-none focus:border-[#3b5bfd]"
+              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-bold tabular-nums focus:outline-none focus:border-[#3b5bfd]"
             />
           </div>
 
@@ -44,7 +44,7 @@ export function SettingsView() {
               max={30}
               value={shortBreakDuration}
               onChange={(e) => setShortBreakDuration(Number(e.target.value))}
-              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-black font-mono focus:outline-none focus:border-[#3b5bfd]"
+              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-bold tabular-nums focus:outline-none focus:border-[#3b5bfd]"
             />
           </div>
 
@@ -56,7 +56,7 @@ export function SettingsView() {
               max={60}
               value={longBreakDuration}
               onChange={(e) => setLongBreakDuration(Number(e.target.value))}
-              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-black font-mono focus:outline-none focus:border-[#3b5bfd]"
+              className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-3 py-2 text-[#0f172a] text-lg font-bold tabular-nums focus:outline-none focus:border-[#3b5bfd]"
             />
           </div>
         </div>

@@ -41,7 +41,7 @@ export function PlanningView({
     <div className="w-full max-w-3xl mx-auto flex flex-col items-center font-detail">
       {/* Frosted Glass Header Card & Task Input */}
       <div className="w-full rounded-3xl border border-white/80 bg-white/70 backdrop-blur-2xl p-7 shadow-[0_14px_40px_rgba(30,40,90,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)] mb-6">
-        <h2 className="font-header text-xl sm:text-2xl font-black text-[#0f172a] tracking-tight mb-1">Planning & Tasks</h2>
+        <h2 className="font-header text-xl sm:text-2xl font-bold text-[#0f172a] tracking-tight mb-1">Planning & Tasks</h2>
         <p className="font-detail text-xs text-[#64748b] mb-5">Organize your action items and assign focus intervals.</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -123,12 +123,12 @@ export function PlanningView({
                       {task.title}
                     </p>
                     <div className="flex items-center gap-2 mt-0.5 text-xs text-[#64748b]">
-                      <span className="font-detail flex items-center gap-1 font-medium">
+                      <span className="font-detail flex items-center gap-1 font-medium tabular-nums">
                         <Flame className="w-3 h-3 text-[#3b5bfd]" />
                         {task.completedPomodoros} / {task.estimatedPomodoros} poms
                       </span>
                       {isFocusing && (
-                        <span className="font-header text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-[#dbeafe] text-[#1d4ed8]">
+                        <span className="font-header text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-[#dbeafe] text-[#1d4ed8]">
                           Active Focus
                         </span>
                       )}

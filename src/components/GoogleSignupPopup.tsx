@@ -103,7 +103,7 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-header text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full bg-blue-50 text-[#3b5bfd] border border-blue-200/60">
+                  <span className="font-header text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-blue-50 text-[#3b5bfd] border border-blue-200/60">
                     3s Quick Prompt
                   </span>
                   <span className="font-detail text-[11px] font-medium text-slate-400">
@@ -111,7 +111,7 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
                   </span>
                 </div>
 
-                <h4 className="font-header text-sm font-black text-[#0f172a] mt-1 tracking-tight">
+                <h4 className="font-header text-sm font-bold text-[#0f172a] mt-1 tracking-tight">
                   Unlock More with Google Sign-in
                 </h4>
                 <p className="font-detail text-xs text-[#475569] mt-0.5 leading-relaxed">

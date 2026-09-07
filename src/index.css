@@ -1,44 +1,53 @@
 @import "tailwindcss";
 
 @theme {
-  --font-brand: "Futura", "League Spartan", "Gilroy-ExtraBold", "Montserrat", system-ui, sans-serif;
-  --font-header: "Gilroy", "Gilroy-ExtraBold", "Proxima Nova", "Montserrat", "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-content: "Gilroy", "Gilroy-Medium", "Proxima Nova", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
-  --font-detail: "Proxima Nova", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Roboto", "Helvetica Neue", sans-serif;
+  --font-brand: "Outfit", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  --font-header: "Outfit", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  --font-content: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-detail: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 @layer base {
+  *, ::before, ::after {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     background-color: #e2e8f0;
     color: #0f172a;
     font-family: var(--font-detail);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-header);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.015em;
   }
 }
 
-/* Explicit typography hierarchy classes based on Masterbrand guidelines */
+/* Modern, ultra-crisp typography hierarchy */
 .font-brand {
-  font-family: "Futura", "League Spartan", "Gilroy-ExtraBold", "Montserrat", system-ui, sans-serif;
-  letter-spacing: -0.03em;
+  font-family: "Outfit", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  letter-spacing: -0.025em;
 }
 
 .font-header {
-  font-family: "Gilroy", "Gilroy-ExtraBold", "Proxima Nova", "Montserrat", "Plus Jakarta Sans", system-ui, sans-serif;
-  letter-spacing: -0.02em;
+  font-family: "Outfit", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  letter-spacing: -0.015em;
 }
 
 .font-content {
-  font-family: "Gilroy", "Gilroy-Medium", "Proxima Nova", "Plus Jakarta Sans", -apple-system, system-ui, sans-serif;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .font-detail {
-  font-family: "Proxima Nova", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Roboto", "Helvetica Neue", sans-serif;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {

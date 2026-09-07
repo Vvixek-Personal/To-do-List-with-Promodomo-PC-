@@ -109,7 +109,7 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
 
         {/* Current Active Task Tag */}
         <div className="relative z-10 w-full flex justify-between items-center text-xs">
-          <span className="font-header font-extrabold tracking-wider uppercase text-[#3b5bfd] text-[11px]">
+          <span className="font-header font-bold tracking-wider uppercase text-[#3b5bfd] text-[11px]">
             SESSION #{completedSessions + 1}
           </span>
           <button
@@ -122,7 +122,7 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
 
         {/* Giant Digital Readout */}
         <div className="relative z-10 flex flex-col items-center justify-center my-auto">
-          <div className="font-header font-black text-7xl sm:text-8xl tracking-tighter text-[#0f172a] drop-shadow-sm select-none">
+          <div className="font-header font-extrabold text-7xl sm:text-8xl tracking-tight text-[#0f172a] tabular-nums select-none">
             {formattedTime}
           </div>
           <p className="font-detail mt-2 text-xs uppercase tracking-[0.2em] text-[#64748b] font-semibold">

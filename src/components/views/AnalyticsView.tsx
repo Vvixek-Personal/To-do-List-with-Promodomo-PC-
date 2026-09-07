@@ -36,8 +36,8 @@ export function AnalyticsView({ tasks }: AnalyticsViewProps) {
       <div className="rounded-3xl border border-white/80 bg-white/70 backdrop-blur-2xl p-7 shadow-[0_14px_40px_rgba(30,40,90,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)]">
         <div className="flex items-center justify-between mb-5">
           <div>
-            <span className="font-header text-xs font-extrabold tracking-wider uppercase text-[#3b5bfd]">PERFORMANCE INSIGHTS</span>
-            <h2 className="font-header text-2xl font-black text-[#0f172a] tracking-tight mt-1">Focus Distribution</h2>
+            <span className="font-header text-xs font-bold tracking-wider uppercase text-[#3b5bfd]">PERFORMANCE INSIGHTS</span>
+            <h2 className="font-header text-2xl font-bold text-[#0f172a] tracking-tight mt-1">Focus Distribution</h2>
           </div>
           <div className="w-12 h-12 rounded-2xl bg-[#eff6ff] border border-[#dbeafe] flex items-center justify-center text-[#3b82f6] shadow-sm">
             <PieChartIcon className="w-6 h-6 stroke-[2]" />
@@ -48,15 +48,15 @@ export function AnalyticsView({ tasks }: AnalyticsViewProps) {
         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-[#e2e8f0]">
           <div>
             <div className="font-detail text-xs font-medium text-[#64748b]">Total Focus Time</div>
-            <div className="font-header text-2xl sm:text-3xl font-black text-[#0f172a] mt-0.5 tracking-tight">{totalFocusHours} hrs</div>
+            <div className="font-header text-2xl sm:text-3xl font-bold text-[#0f172a] mt-0.5 tracking-tight tabular-nums">{totalFocusHours} hrs</div>
           </div>
           <div>
             <div className="font-detail text-xs font-medium text-[#64748b]">Completed Poms</div>
-            <div className="font-header text-2xl sm:text-3xl font-black text-[#0f172a] mt-0.5 tracking-tight">{totalPoms} poms</div>
+            <div className="font-header text-2xl sm:text-3xl font-bold text-[#0f172a] mt-0.5 tracking-tight tabular-nums">{totalPoms} poms</div>
           </div>
           <div>
             <div className="font-detail text-xs font-medium text-[#64748b]">Efficiency</div>
-            <div className="font-header text-2xl sm:text-3xl font-black text-[#10b981] mt-0.5 tracking-tight">{efficiency}%</div>
+            <div className="font-header text-2xl sm:text-3xl font-bold text-[#10b981] mt-0.5 tracking-tight tabular-nums">{efficiency}%</div>
           </div>
         </div>
       </div>
@@ -93,9 +93,9 @@ export function AnalyticsView({ tasks }: AnalyticsViewProps) {
                     <div className={`w-3.5 h-3.5 rounded-full ${cat.color} shadow-sm flex-shrink-0`} />
                     <span className="font-content font-bold text-[#0f172a] truncate">{cat.name}</span>
                   </div>
-                  <div className="flex items-center gap-4 text-[#64748b] font-mono flex-shrink-0">
+                  <div className="flex items-center gap-4 text-[#64748b] font-detail tabular-nums flex-shrink-0">
                     <span className="font-detail text-xs font-medium">{cat.poms} poms</span>
-                    <span className="w-12 text-right font-header font-extrabold text-xs text-[#0f172a]">{cat.percentage}%</span>
+                    <span className="w-12 text-right font-header font-bold text-xs text-[#0f172a]">{cat.percentage}%</span>
                   </div>
                 </div>
               ))}
