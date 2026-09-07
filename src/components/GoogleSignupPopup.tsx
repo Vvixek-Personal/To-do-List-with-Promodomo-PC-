@@ -75,7 +75,7 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="fixed top-5 inset-x-4 sm:inset-x-auto sm:right-6 sm:max-w-md z-50 pointer-events-auto"
+          className="fixed top-5 inset-x-4 sm:inset-x-auto sm:right-6 sm:max-w-md z-50 pointer-events-auto font-detail"
         >
           <div className="relative overflow-hidden rounded-3xl border border-white/90 bg-white/95 backdrop-blur-2xl p-5 shadow-[0_20px_50px_rgba(15,23,42,0.18),0_4px_12px_rgba(59,91,253,0.12),inset_0_1px_2px_rgba(255,255,255,0.95)]">
             
@@ -103,18 +103,18 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-blue-50 text-[#3b5bfd] border border-blue-200/60">
+                  <span className="font-header text-[10px] font-extrabold tracking-wider uppercase px-2 py-0.5 rounded-full bg-blue-50 text-[#3b5bfd] border border-blue-200/60">
                     3s Quick Prompt
                   </span>
-                  <span className="text-[11px] font-semibold text-slate-400">
+                  <span className="font-detail text-[11px] font-medium text-slate-400">
                     Auto-closing
                   </span>
                 </div>
 
-                <h4 className="text-sm font-bold text-[#0f172a] mt-1">
+                <h4 className="font-header text-sm font-black text-[#0f172a] mt-1 tracking-tight">
                   Unlock More with Google Sign-in
                 </h4>
-                <p className="text-xs text-[#475569] mt-0.5 leading-relaxed">
+                <p className="font-detail text-xs text-[#475569] mt-0.5 leading-relaxed">
                   Sign in to automatically sync your tasks and focus records across your laptop and devices.
                 </p>
 
@@ -122,7 +122,7 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
                   <button
                     onClick={handleSignInClick}
                     disabled={isSigningIn}
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-xs font-bold text-[#0f172a] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.09)] transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
+                    className="font-header flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-xs font-bold text-[#0f172a] shadow-[0_2px_8px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.09)] transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
                   >
                     {/* Google G Logo SVG */}
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@ export function GoogleSignupPopup({ isOpen, onClose, onSignIn }: GoogleSignupPop
 
                   <button
                     onClick={onClose}
-                    className="px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+                    className="font-detail px-3 py-2.5 rounded-xl text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
                   >
                     Dismiss
                   </button>

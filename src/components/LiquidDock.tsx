@@ -122,7 +122,7 @@ export function LiquidDock({ activeTab, onTabChange }: LiquidDockProps) {
                           opacity: { duration: 0.18, ease: 'easeOut' },
                           filter: { duration: 0.18 }
                         }}
-                        className="overflow-hidden whitespace-nowrap text-xs sm:text-sm font-semibold tracking-wide pr-2 text-[#3b5bfd]"
+                        className="font-header overflow-hidden whitespace-nowrap text-xs sm:text-sm font-bold tracking-wide pr-2 text-[#3b5bfd]"
                       >
                         {item.label}
                       </motion.span>

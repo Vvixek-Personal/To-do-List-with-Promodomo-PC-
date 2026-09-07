@@ -222,7 +222,7 @@ export default function App() {
   const completedTasksCount = tasks.filter((t) => t.completed).length;
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans select-none overflow-x-hidden text-[#0f172a]">
+    <div className="relative min-h-screen flex flex-col font-detail select-none overflow-x-hidden text-[#0f172a]">
       {/* Ambient Misty Mountain Lake Landscape Backdrop */}
       <LiquidBackground />
 
@@ -238,12 +238,33 @@ export default function App() {
       {/* Main View Area: Framed inside the soft glass window */}
       <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-5 pb-28 flex flex-col items-center justify-center">
         
-        {/* Quick Profile / Status Pill */}
-        <div className="w-full flex items-center justify-end px-2 mb-3">
+        {/* Top Header Bar: Futura-crafted Wordmark & Quick Profile Pill */}
+        <div className="w-full flex items-center justify-between px-2 mb-3">
+          {/* Brand Wordmark (Futura customized geometric modification) */}
+          <div 
+            onClick={() => setActiveTab('dashboard')}
+            className="flex items-center gap-2.5 cursor-pointer group"
+          >
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#3b5bfd] to-[#6366f1] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(59,91,253,0.35)] group-hover:scale-105 transition-transform">
+              <svg className="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" />
+              </svg>
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="font-brand font-black tracking-tighter text-[#0f172a] text-lg sm:text-xl uppercase">
+                POMOFLOW
+              </span>
+              <span className="font-detail text-[10px] text-[#64748b] font-semibold tracking-wider uppercase">
+                Focus & Tasks
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Profile / Status Pill */}
           {user ? (
             <button
               onClick={() => setActiveTab('profile')}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/70 hover:bg-white border border-white/90 text-xs font-semibold text-[#0f172a] shadow-sm backdrop-blur-md transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/75 hover:bg-white border border-white/95 text-xs font-content font-semibold text-[#0f172a] shadow-sm backdrop-blur-md transition-all cursor-pointer"
             >
               {user.photoURL ? (
                 <img
@@ -253,11 +274,11 @@ export default function App() {
                   className="w-4 h-4 rounded-full object-cover"
                 />
               ) : (
-                <div className="w-4 h-4 rounded-full bg-[#3b5bfd] text-white flex items-center justify-center text-[9px] font-bold">
+                <div className="w-4 h-4 rounded-full bg-[#3b5bfd] text-white flex items-center justify-center text-[9px] font-bold font-header">
                   {user.displayName ? user.displayName.charAt(0).toUpperCase() : 'G'}
                 </div>
               )}
-              <span className="truncate max-w-[120px]">{user.displayName || 'Google User'}</span>
+              <span className="truncate max-w-[120px] font-content font-semibold">{user.displayName || 'Google User'}</span>
             </button>
           ) : (
             <button
@@ -265,10 +286,10 @@ export default function App() {
                 setShowSignupPopup(true);
                 setActiveTab('profile');
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 hover:bg-white border border-white/90 text-xs font-medium text-[#475569] shadow-sm backdrop-blur-md transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/75 hover:bg-white border border-white/95 text-xs font-detail font-medium text-[#475569] shadow-sm backdrop-blur-md transition-all cursor-pointer"
             >
               <span className="w-2 h-2 rounded-full bg-slate-400" />
-              <span>Guest Mode</span>
+              <span className="font-content font-medium">Guest Mode</span>
             </button>
           )}
         </div>

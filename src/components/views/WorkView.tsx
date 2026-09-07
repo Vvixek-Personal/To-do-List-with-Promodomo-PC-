@@ -58,40 +58,40 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
   const progressPercent = ((totalSeconds - timeLeft) / totalSeconds) * 100;
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center font-sans">
+    <div className="w-full max-w-xl mx-auto flex flex-col items-center font-detail">
       {/* Mode Selector Pill in Frosted Glass */}
       <div className="flex items-center p-1.5 rounded-full bg-white/70 border border-white/80 backdrop-blur-2xl shadow-[0_8px_25px_rgba(30,40,90,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] mb-8">
         <button
           onClick={() => switchMode('pomodoro')}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`font-header flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             mode === 'pomodoro'
               ? 'bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] text-white shadow-[0_4px_16px_rgba(59,91,253,0.35)]'
               : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Flame className="w-4 h-4 stroke-[2]" />
+          <Flame className="w-4 h-4 stroke-[2.5]" />
           Focus (25m)
         </button>
         <button
           onClick={() => switchMode('shortBreak')}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`font-header flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             mode === 'shortBreak'
               ? 'bg-emerald-600 text-white shadow-[0_4px_16px_rgba(16,185,129,0.35)]'
               : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Coffee className="w-4 h-4 stroke-[2]" />
+          <Coffee className="w-4 h-4 stroke-[2.5]" />
           Short Break (5m)
         </button>
         <button
           onClick={() => switchMode('longBreak')}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+          className={`font-header flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             mode === 'longBreak'
               ? 'bg-indigo-600 text-white shadow-[0_4px_16px_rgba(79,70,229,0.35)]'
               : 'text-[#64748b] hover:text-[#0f172a]'
           }`}
         >
-          <Sparkles className="w-4 h-4 stroke-[2]" />
+          <Sparkles className="w-4 h-4 stroke-[2.5]" />
           Long Break (15m)
         </button>
       </div>
@@ -109,12 +109,12 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
 
         {/* Current Active Task Tag */}
         <div className="relative z-10 w-full flex justify-between items-center text-xs">
-          <span className="font-bold tracking-wider uppercase text-[#3b5bfd] text-[11px]">
+          <span className="font-header font-extrabold tracking-wider uppercase text-[#3b5bfd] text-[11px]">
             SESSION #{completedSessions + 1}
           </span>
           <button
             onClick={onNavigateToPlanning}
-            className="text-[11px] font-semibold text-[#3b5bfd] hover:text-[#2546db] transition-colors underline-offset-4 hover:underline cursor-pointer truncate max-w-[200px]"
+            className="font-content text-[11px] font-bold text-[#3b5bfd] hover:text-[#2546db] transition-colors underline-offset-4 hover:underline cursor-pointer truncate max-w-[200px]"
           >
             {activeTaskTitle ? `Focus: ${activeTaskTitle}` : '+ Select Task'}
           </button>
@@ -122,10 +122,10 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
 
         {/* Giant Digital Readout */}
         <div className="relative z-10 flex flex-col items-center justify-center my-auto">
-          <div className="text-7xl sm:text-8xl font-bold tracking-tight text-[#0f172a] drop-shadow-sm font-sans select-none">
+          <div className="font-header font-black text-7xl sm:text-8xl tracking-tighter text-[#0f172a] drop-shadow-sm select-none">
             {formattedTime}
           </div>
-          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[#64748b] font-semibold">
+          <p className="font-detail mt-2 text-xs uppercase tracking-[0.2em] text-[#64748b] font-semibold">
             {isRunning ? 'Session in progress' : 'Ready to begin'}
           </p>
 
@@ -152,7 +152,7 @@ export function WorkView({ activeTaskTitle, onNavigateToPlanning, onPomodoroComp
           <button
             id="work-timer-toggle"
             onClick={toggleTimer}
-            className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] hover:from-[#324fdf] hover:to-[#4e40e6] text-white font-semibold text-sm shadow-[0_10px_25px_rgba(59,91,253,0.35)] transition-all cursor-pointer flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="font-header px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#3b5bfd] to-[#5b4eff] hover:from-[#324fdf] hover:to-[#4e40e6] text-white font-bold text-sm tracking-wide shadow-[0_10px_25px_rgba(59,91,253,0.35)] transition-all cursor-pointer flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
           >
             {isRunning ? (
               <>
